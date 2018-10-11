@@ -81,7 +81,6 @@ export const render = (
       });
       res.send(html);
     } catch (error) {
-      console.log('error', error);
       res.json(error);
     }
   })();
