@@ -61,7 +61,7 @@ function _render() {
                         renderedContent = renderer(React.createElement(StaticRouter, {
                           location: req.originalUrl,
                           context: context
-                        }, console.log(routes), ";", fn(Ultimate)({
+                        }, fn(Ultimate)({
                           routes: routes
                         })));
                         helmet = Helmet.renderStatic();
@@ -165,9 +165,9 @@ function _render() {
                   }
                 }
               }, _callee2, this);
-            }))).catch(function () {
+            }))).catch(function (error) {
               res.status(401);
-              return "<!doctype html><html><body>Access denied.</body></html>";
+              return "<!doctype html><html><body>Access denied. {error}</body></html>";
             });
 
           case 13:

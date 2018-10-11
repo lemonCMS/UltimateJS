@@ -24,8 +24,6 @@ export async function render(options) {
     const renderer = customRenderer || defaultRenderer;
     const renderedContent = renderer(
       <StaticRouter location={req.originalUrl} context={context}>
-        {console.log(routes)};
-
         {fn(Ultimate)({ routes })}
       </StaticRouter>
     );
@@ -75,9 +73,9 @@ export async function render(options) {
     return `<!doctype html>${doc.replace('DO_NOT_DELETE_THIS_YOU_WILL_BREAK_YOUR_APP', html)}`;
 
   })
-  .catch(() => {
+  .catch((error) => {
     res.status(401);
-    return (`<!doctype html><html><body>Access denied.</body></html>`);
+    return (`<!doctype html><html><body>Access denied. {error}</body></html>`);
   });
 
 }
