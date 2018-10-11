@@ -11,7 +11,7 @@ import { render as ultimateRender } from '../render';
 
 const paths = require('razzle/config/paths');
 // eslint-disable-next-line
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+const assets = require(paths.appManifest);
 
 let vendorAssets = {};
 if (process.env.RAZZLE_VENDOR_MANIFEST) {
@@ -23,9 +23,7 @@ if (process.env.RAZZLE_VENDOR_MANIFEST) {
 
 const index = express();
 
-index
-  .disable('x-powered-by')
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR));
+index.disable('x-powered-by').use(express.static(paths.appPublic));
 
 export default index;
 
