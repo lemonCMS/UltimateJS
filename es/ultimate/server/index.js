@@ -118,16 +118,15 @@ export var render = function render(
               case 14:
                 html = _context.sent;
                 res.send(html);
-                _context.next = 22;
+                _context.next = 21;
                 break;
 
               case 18:
                 _context.prev = 18;
                 _context.t0 = _context.catch(0);
-                console.log('error', _context.t0);
                 res.json(_context.t0);
 
-              case 22:
+              case 21:
               case 'end':
                 return _context.stop();
             }

@@ -16,6 +16,7 @@ export default (function(_ref) {
               result: parsed,
             });
           } catch (error) {
+            // eslint-disable-next-line no-console
             console.error('Json parse failed: ', error);
           }
         }

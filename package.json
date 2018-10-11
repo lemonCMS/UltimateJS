@@ -26,9 +26,10 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run ci-lint -- --fix",
+      "npm run ci-lint ./packages -- --fix",
       "git add"
-    ]
+    ],
+    "ignore": ["**/lib/*.js", "**/es/*.js"]
   },
   "prettier": {
     "singleQuote": true,
