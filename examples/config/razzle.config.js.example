@@ -1,0 +1,156 @@
+const { modifyRule } = require('razzle-config-utils');
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
+
+const webpack = require('webpack');
+require('babel-polyfill');
+
+module.exports = {
+  modify: (baseConfig, { dev, target }) => {
+    const appConfig = Object.assign({}, baseConfig);
+
+    if (target === 'web') {
+      appConfig.entry.client.push(
+        'font-awesome-webpack!./src/theme/font-awesome/font-awesome.config.js',
+      );
+      // modify filenaming to account for multiple entry files
+      appConfig.output.filename = dev
+        ? 'static/js/[name].js'
+        : 'static/js/[name].[hash:8].js';
+
+      appConfig.optimization = {
+        splitChunks: {
+          chunks: 'async',
+          minSize: 30000,
+          maxSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 3,
+          automaticNameDelimiter: '~',
+          name: true,
+          cacheGroups: {
+            vendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
+    appConfig.plugins = appConfig.plugins.map(plugin => {
+      if (plugin.constructor.name === 'WatchIgnorePlugin') {
+        plugin.paths.push(`${__dirname}/build/react-loadable.json`);
+        plugin.paths.push(`${__dirname}/src/server/index.js`);
+        plugin.paths.push(`${__dirname}/src/client/index.js`);
+      }
+      return plugin;
+    });
+
+    if (target === 'web') {
+      appConfig.plugins.push(
+        new ReactLoadablePlugin({
+          filename: './build/react-loadable.json',
+        }),
+      );
+
+      // Setup SCSS
+      const cssLoader = {
+        loader: 'css-loader',
+        options: {
+          minimize: !dev,
+          sourceMap: dev,
+          importLoaders: 3,
+        },
+      };
+
+      const postCSSLoader = {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+          sourceMap: dev,
+          plugins: () => [
+            autoprefixer({
+              browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 9', // React doesn't support IE8 anyway
+              ],
+            }),
+          ],
+        },
+      };
+
+      const sassLoader = {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true,
+        },
+      };
+
+      const lessLoader = {
+        loader: 'less-loader',
+        options: {
+          outputStyle: 'expanded',
+          sourceMap: true,
+        },
+      };
+
+      if (dev) {
+        appConfig.module.rules.push({
+          test: /\.less$/,
+          use: ['style-loader', cssLoader, postCSSLoader, lessLoader],
+        });
+
+        // For development, include source map
+        appConfig.module.rules.push({
+          test: /\.(sa|sc)ss$/,
+          use: ['style-loader', cssLoader, postCSSLoader, sassLoader],
+        });
+
+        appConfig.plugins.push(
+          new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+          }),
+        );
+      } else {
+        // For production, extract CSS
+        appConfig.module.rules.push({
+          test: /\.(sa|sc)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            cssLoader,
+            postCSSLoader,
+            'resolve-url-loader',
+            sassLoader,
+          ],
+        });
+
+        appConfig.plugins.push(
+          new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+          }),
+        );
+      }
+    } else {
+      appConfig.module.rules.push({
+        test: /.scss$/,
+        use: ['ignore-loader'],
+      });
+    }
+
+    return appConfig;
+  },
+};
