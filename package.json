@@ -12,7 +12,7 @@
     "build-docs": "yarn --cwd www run build",
     "start": "yarn --cwd www run develop",
     "ci-lint": "eslint --rule 'prettier/prettier: 2'",
-    "format": "npm run ci-lint . -- --fix",
+    "format": "npm run ci-lint ./packages -- --fix",
     "lint": "npm run ci-lint ./packages",
     "precommit": "lint-staged",
     "release": "rollout",
