@@ -1,10 +1,9 @@
 import propName from './propName';
 import propNameAuth from './propNameAuth';
-
-export default (function(hooks) {
-  return function(ComposedComponent) {
+export default (function (hooks) {
+  return function (ComposedComponent) {
     if (hooks.authorized !== 'undefined') {
-      let authHooks = {};
+      var authHooks = {};
       authHooks.authorized = hooks.authorized;
       ComposedComponent[propNameAuth] = authHooks;
       delete hooks.authorized;

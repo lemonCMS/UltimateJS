@@ -6,7 +6,7 @@ import NProgress from 'nprogress';
 import asyncMap from '../asyncMap';
 import asyncMatchRoutes from '../asyncMatchRoutes';
 
-require('./nprogress.css');
+// require('./nprogress.css');
 
 class ReduxAsyncConnect extends Component {
   static propTypes = {
