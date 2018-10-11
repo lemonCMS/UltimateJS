@@ -41,7 +41,7 @@ module.exports = function (baseConfig, _ref, vendor) {
     var publicPath = "http://" + (process.env.HOST || 'localhost') + ":" + process.env.PORT_DEV + "/";
     appConfig.plugins.push(new AutoDllPlugin({
       filename: '[name].js',
-      debug: true,
+      debug: false,
       entry: {
         vendor: vendor
       },

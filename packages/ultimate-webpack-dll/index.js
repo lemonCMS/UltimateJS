@@ -43,7 +43,7 @@ module.exports = (baseConfig, { dev }, vendor) => {
     appConfig.plugins.push(
       new AutoDllPlugin({
         filename: '[name].js',
-        debug: true,
+        debug: false,
         entry: {
           vendor,
         },
