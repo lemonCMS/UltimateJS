@@ -59,9 +59,9 @@ function _render() {
 
                         renderer = customRenderer || defaultRenderer;
                         renderedContent = renderer(React.createElement(StaticRouter, {
-                          location: req.url,
+                          location: req.originalUrl,
                           context: context
-                        }, fn(Ultimate)({
+                        }, console.log(routes), ";", fn(Ultimate)({
                           routes: routes
                         })));
                         helmet = Helmet.renderStatic();

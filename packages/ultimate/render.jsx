@@ -23,7 +23,9 @@ export async function render(options) {
     const defaultRenderer = (element) => ({ html: ReactDOMServer.renderToString(element) });
     const renderer = customRenderer || defaultRenderer;
     const renderedContent = renderer(
-      <StaticRouter location={req.url} context={context}>
+      <StaticRouter location={req.originalUrl} context={context}>
+        {console.log(routes)};
+
         {fn(Ultimate)({ routes })}
       </StaticRouter>
     );
