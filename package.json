@@ -25,10 +25,12 @@
     "build-storybook": "build-storybook"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run ci-lint ./packages -- --fix",
-      "git add"
-    ],
+    "linters": {
+      "*.js": [
+        "npm run ci-lint ./packages -- --fix",
+        "git add"
+      ]
+    },
     "ignore": ["**/lib/*.js", "**/es/*.js"]
   },
   "prettier": {
