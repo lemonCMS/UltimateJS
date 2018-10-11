@@ -31,7 +31,7 @@
         "git add"
       ]
     },
-    "ignore": ["**/lib/*.js", "**/es/*.js"]
+    "ignore": ["**/lib/**/*.js", "**/es/**/*.js"]
   },
   "prettier": {
     "singleQuote": true,
