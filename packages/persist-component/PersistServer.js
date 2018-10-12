@@ -1,25 +1,34 @@
-import asyncMap from '../ultimate/asyncMap';
+/* eslint no-return-assign: "error" */
+import _map from 'lodash/map';
+import prepare from './prepare';
+
+const asyncMap = (arr, mapper) => {
+  let q = Promise.resolve();
+  return Promise.all(arr.map(v => (q = q.then(() => mapper(v)))));
+};
 
 export default ({ store, storage, modules }) => {
+  const preparedModules = prepare(modules);
   const promises = [];
-  (typeof modules === 'string' ? [modules] : modules).map(module => {
+
+  _map(preparedModules, (module, key) => {
     promises.push(
-      storage.getItem(module).then(item => {
+      storage.getItem(key).then(item => {
         if (item !== null && item !== 'undefined') {
           try {
-            const parsed = typeof item === 'string' ? JSON.parse(item) : item;
-            store.dispatch({
-              type: `@@redux-persist-component/${module}`,
-              result: parsed,
+            const result = typeof item === 'string' ? JSON.parse(item) : item;
+            module.restore({
+              dispatch: store.dispatch,
+              result,
+              key,
+              currentState: {},
             });
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error('Json parse failed: ', error);
+          } catch (e) {
+            console.log('Json parse failed', e);
           }
         }
       }),
     );
-    return null;
   });
 
   return asyncMap(promises, promise => promise);
