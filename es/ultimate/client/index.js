@@ -4,7 +4,6 @@ import '@babel/polyfill';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -35,16 +34,14 @@ function () {
             });
             hydrate(React.createElement(Provider, {
               store: store
-            }, React.createElement(BrowserRouter, null, React.createElement(ConnectedRouter, {
-              history: providers.history
-            }, React.createElement(ReduxAsyncConnect, {
+            }, React.createElement(BrowserRouter, null, React.createElement(ReduxAsyncConnect, {
               routes: _routes,
               store: store,
               helpers: providers
             }, wrapper(ultimate, {
               store: store,
               providers: providers
-            }))))), document.getElementById('root'));
+            })))), document.getElementById('root'));
 
           case 3:
           case "end":

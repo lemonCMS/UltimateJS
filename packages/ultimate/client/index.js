@@ -2,7 +2,6 @@ import '@babel/polyfill';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -19,11 +18,9 @@ export const rehydrate = async (_routes, { store, providers }, wrapper) => {
   hydrate(
     <Provider store={store}>
       <BrowserRouter>
-        <ConnectedRouter history={providers.history}>
-          <ReduxAsyncConnect routes={_routes} store={store} helpers={providers}>
-            {wrapper(ultimate, { store, providers })}
-          </ReduxAsyncConnect>
-        </ConnectedRouter>
+        <ReduxAsyncConnect routes={_routes} store={store} helpers={providers}>
+          {wrapper(ultimate, { store, providers })}
+        </ReduxAsyncConnect>
       </BrowserRouter>
     </Provider>,
     document.getElementById('root'),
