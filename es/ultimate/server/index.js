@@ -27,7 +27,14 @@ if (process.env.RAZZLE_VENDOR_MANIFEST) {
 }
 
 var index = express();
-index.disable('x-powered-by').use(express.static(paths.appBuildPublic));
+index.disable('x-powered-by');
+
+if (process.env.NODE_ENV === 'production') {
+  index.use(express.static(paths.appBuildPublic));
+} else {
+  index.use(express.static(paths.appPublic));
+}
+
 export default index;
 export var render = function render(_ref, stats, routes, _ref2, wrapper, awaitRender) {
   var req = _ref.req,

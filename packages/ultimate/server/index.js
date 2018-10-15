@@ -23,7 +23,12 @@ if (process.env.RAZZLE_VENDOR_MANIFEST) {
 
 const index = express();
 
-index.disable('x-powered-by').use(express.static(paths.appBuildPublic));
+index.disable('x-powered-by');
+if (process.env.NODE_ENV === 'production') {
+  index.use(express.static(paths.appBuildPublic));
+} else {
+  index.use(express.static(paths.appPublic));
+}
 
 export default index;
 
