@@ -129,6 +129,17 @@ class Wrap extends React.Component {
       }
     };
 
+    const validationState = () => {
+      if ((touched && error) || (submitFailed && submitError)) {
+        return true;
+      }
+
+      if (touched && valid) {
+        return false;
+      }
+    };
+
+
     const add = _pick(custom, ['type', 'placeholder', 'rows', 'cols', 'bsClass']);
     if (add.type === 'select') {
       add.as = 'select';
@@ -149,6 +160,9 @@ class Wrap extends React.Component {
     if (props.field.bsClass) {
       add.bsClass = props.field.bsClass;
     }
+
+    add.isInvalid =  touched && validationState();
+    add.isValid =  touched && !validationState();
 
     const component = () => {
       // Render custom component
@@ -199,16 +213,6 @@ class Wrap extends React.Component {
       }
     };
 
-    const validationState = () => {
-      if ((touched && error) || (submitFailed && submitError)) {
-        return 'error';
-      }
-
-      if (touched && valid) {
-        return 'success';
-      }
-    };
-
     const buttonBefore = () => {
       if (_has(props.field, 'buttonBefore')) {
         return (<InputGroup.Prepand>{props.field.buttonBefore()}</InputGroup.Prepand>);
@@ -239,6 +243,7 @@ class Wrap extends React.Component {
         || _has(props.field, 'buttonBefore')
         || _has(props.field, 'buttonAfter')
       ) {
+
         return (
           <InputGroup isInvalid={validationState()}>
             {buttonBefore()}
@@ -266,7 +271,6 @@ class Wrap extends React.Component {
         );
       }
     };
-
     const rendered = (<FormGroup
       as={Row}
       {...thisSize()}
@@ -274,9 +278,8 @@ class Wrap extends React.Component {
       {getLabel()}
       <Col {...fieldSize()}>
         {getField()}
-        {((touched && error) || (submitFailed && submitError)) && <FormControl.Feedback />}
         {props.field.help && (!touched || (!submitError && !error)) && <HelpBlock>{props.field.help}</HelpBlock>}
-        {((touched && error) || (submitFailed && submitError)) && <HelpBlock>{(submitError || error)}</HelpBlock>}
+        {((touched && error) || (submitFailed && submitError)) && <FormControl.Feedback type={'invalid'}>{(submitError || error)}</FormControl.Feedback>}
       </Col>
     </FormGroup>);
 

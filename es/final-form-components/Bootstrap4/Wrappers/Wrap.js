@@ -184,6 +184,16 @@ function (_React$Component) {
       }
     };
 
+    var validationState = function validationState() {
+      if (touched && error || submitFailed && submitError) {
+        return true;
+      }
+
+      if (touched && valid) {
+        return false;
+      }
+    };
+
     var add = _pick(custom, ['type', 'placeholder', 'rows', 'cols', 'bsClass']);
 
     if (add.type === 'select') {
@@ -209,6 +219,9 @@ function (_React$Component) {
     if (props.field.bsClass) {
       add.bsClass = props.field.bsClass;
     }
+
+    add.isInvalid = touched && validationState();
+    add.isValid = touched && !validationState();
 
     var component = function component() {
       // Render custom component
@@ -266,16 +279,6 @@ function (_React$Component) {
       }
     };
 
-    var validationState = function validationState() {
-      if (touched && error || submitFailed && submitError) {
-        return 'error';
-      }
-
-      if (touched && valid) {
-        return 'success';
-      }
-    };
-
     var buttonBefore = function buttonBefore() {
       if (_has(props.field, 'buttonBefore')) {
         return React.createElement(InputGroup.Prepand, null, props.field.buttonBefore());
@@ -324,7 +327,9 @@ function (_React$Component) {
 
     var rendered = React.createElement(FormGroup, _extends({
       as: Row
-    }, thisSize()), getLabel(), React.createElement(Col, fieldSize(), getField(), (touched && error || submitFailed && submitError) && React.createElement(FormControl.Feedback, null), props.field.help && (!touched || !submitError && !error) && React.createElement(HelpBlock, null, props.field.help), (touched && error || submitFailed && submitError) && React.createElement(HelpBlock, null, submitError || error)));
+    }, thisSize()), getLabel(), React.createElement(Col, fieldSize(), getField(), props.field.help && (!touched || !submitError && !error) && React.createElement(HelpBlock, null, props.field.help), (touched && error || submitFailed && submitError) && React.createElement(FormControl.Feedback, {
+      type: 'invalid'
+    }, submitError || error)));
 
     if (this.context.debug) {
       return React.createElement("div", {
