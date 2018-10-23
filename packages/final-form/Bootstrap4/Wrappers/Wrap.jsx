@@ -19,6 +19,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup';
 // import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import HelpBlock from 'react-bootstrap/lib/FormText';
 import MenuItem from 'react-bootstrap/lib/DropdownItem';
+import {Divider} from 'react-bootstrap/lib/Dropdown';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import {Field} from 'react-final-form';
 
@@ -57,9 +58,11 @@ class Wrap extends React.Component {
         }
         menuItem.push(<MenuItem key={key} onSelect={select}>{item.props.children}</MenuItem>);
       }
+
       if (item.props.selected) {
-        menuItem.push(<MenuItem key={key + '_div'} divider />);
+        menuItem.push(<Divider/>);
       }
+
 
     });
     return {dropDownTitle, menuItem};
