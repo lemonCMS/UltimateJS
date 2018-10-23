@@ -87,15 +87,13 @@ export default function connectToFilter(rest) {
         });
       };
 
-      _proto.componentWillMount = function componentWillMount() {
+      _proto.componentDidMount = function componentDidMount() {
         var params = createAllParamsForFetch(this.props);
         this.setState({
           form: _clone(params),
           mount: _clone(params)
         });
       };
-
-      StateConnection.getDerivedStateFromProps = function getDerivedStateFromProps() {};
 
       _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
         if (this.props.match.path === prevProps.match.path) {

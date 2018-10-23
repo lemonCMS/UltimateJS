@@ -76,13 +76,9 @@ export default function connectToFilter(rest) {
         return Qs.stringify(_omit(state, value => !value), {encode: false});
       }
 
-      componentWillMount() {
+      componentDidMount() {
         const params = createAllParamsForFetch(this.props);
         this.setState({form: _clone(params), mount: _clone(params)});
-      }
-
-      static getDerivedStateFromProps() {
-
       }
 
       componentDidUpdate(prevProps) {
