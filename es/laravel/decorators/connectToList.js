@@ -20,7 +20,7 @@ import Search from '../components/Search';
 import Pending from '../components/Pending';
 export default function connnectToList(properties) {
   return function (WrappedComponent) {
-    var _dec, _dec2, _dec3, _dec4, _dec5, _class;
+    var _dec, _dec2, _dec3, _dec4, _class;
 
     var Connection = (_dec = provideHooks({
       fetch: function fetch(_ref) {
@@ -43,12 +43,12 @@ export default function connnectToList(properties) {
         promises.push(dispatch(load(properties.key, api(), state)));
         return Promise.all(promises);
       }
-    }), _dec2 = withRouter(), _dec3 = connectToFilter(), _dec4 = connectToConfirm(), _dec5 = connect(function (state) {
+    }), _dec2 = connectToFilter(), _dec3 = connectToConfirm(), _dec4 = connect(function (state) {
       return {
         data: state.store[properties.key],
         auth: state.auth
       };
-    }), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = _dec5(_class =
+    }), _dec(_class = withRouter(_class = _dec2(_class = _dec3(_class = _dec4(_class =
     /*#__PURE__*/
     function (_Component) {
       _inheritsLoose(Connection, _Component);

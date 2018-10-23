@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 import { post, update } from '../redux/store/actions';
 export default (function (custom) {
   return function (Component) {
-    var _dec, _class;
+    var _class;
 
     var config = Object.assign({}, {
       api: null,
@@ -25,7 +25,7 @@ export default (function (custom) {
       console.warn('Redux store `key` is required');
     }
 
-    var WrappedComponent = (_dec = withRouter(), _dec(_class =
+    var WrappedComponent = withRouter(_class =
     /*#__PURE__*/
     function (_React$Component) {
       _inheritsLoose(WrappedComponent, _React$Component);
@@ -125,7 +125,8 @@ export default (function (custom) {
       };
 
       return WrappedComponent;
-    }(React.Component)) || _class);
+    }(React.Component)) || _class;
+
     return WrappedComponent;
   };
 });

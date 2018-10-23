@@ -35,7 +35,7 @@ export default function connnectToList(properties) {
         return Promise.all(promises);
       }
     })
-    @withRouter()
+    @withRouter
     @connectToFilter()
     @connectToConfirm()
     @connect(state => (

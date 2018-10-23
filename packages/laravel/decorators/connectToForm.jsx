@@ -20,7 +20,7 @@ export default custom => (Component) => {
     console.warn('Redux store `key` is required');
   }
 
-  @withRouter()
+  @withRouter
   class WrappedComponent extends React.Component {
 
     constructor(props) {
