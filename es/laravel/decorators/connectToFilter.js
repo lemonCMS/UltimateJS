@@ -98,10 +98,10 @@ export default function connectToFilter(rest) {
       _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
         if (this.props.match.path === prevProps.match.path) {
           if (!_isEqual(this.state, prevProps.history.location.state)) {
-            if (_isObject(nextProps.history.location.state)) {
-              this.props.dispatch(storeState(nextProps.history.location.pathname, nextProps.history.location.state));
+            if (_isObject(prevProps.history.location.state)) {
+              this.props.dispatch(storeState(prevProps.history.location.pathname, prevProps.history.location.state));
               this.setState({
-                form: nextProps.history.location.state
+                form: prevProps.history.location.state
               });
             } else if (!_isEmpty(this.state.mount) && !_isEqual(this.state.mount, this.state.form)) {
               this.props.dispatch(storeState(this.props.history.location.pathname, this.state.mount));
