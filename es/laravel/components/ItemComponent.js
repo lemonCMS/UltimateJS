@@ -37,7 +37,7 @@ function (_React$Component) {
                   if (!_this.state.edit) {
                     promise = _this.context.store.dispatch(post(_this.key, "" + _this.apiPath, payload));
                   } else {
-                    promise = _this.context.store.dispatch(update(_this.key, "" + _this.apiPath, _this.context.router.route.match.params.id, payload));
+                    promise = _this.context.store.dispatch(update(_this.key, "" + _this.apiPath, _this.props.match.params.id, payload));
                   }
 
                   promise.then(function (ret) {

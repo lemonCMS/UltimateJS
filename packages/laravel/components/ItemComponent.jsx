@@ -46,7 +46,7 @@ class TestComponent extends React.Component {
       if (!this.state.edit) {
         promise = this.context.store.dispatch(post(this.key, `${this.apiPath}`, payload));
       } else {
-        promise = this.context.store.dispatch(update(this.key, `${this.apiPath}`, this.context.router.route.match.params.id, payload));
+        promise = this.context.store.dispatch(update(this.key, `${this.apiPath}`, this.props.match.params.id, payload));
       }
 
       promise.then((ret) => {
