@@ -1,16 +1,17 @@
 import axios from 'axios';
 
+const buildTarget = typeof window === 'undefined' ? 'server' : 'client';
+
 export default function apiClient(req) {
   const instance = axios.create({
     baseURL:
-      (process.env.BUILD_TARGET === 'server'
-        ? process.env.RAZZLE_PROXY_HOST
-        : '') + process.env.RAZZLE_PROXY_PATH,
+      (buildTarget === 'server' ? process.env.RAZZLE_PROXY_HOST : '') +
+      process.env.RAZZLE_PROXY_PATH,
   });
 
   instance.interceptors.request.use(
     conf => {
-      if (process.env.BUILD_TARGET === 'server') {
+      if (buildTarget === 'server') {
         if (req.cookies && req.cookies.get('token')) {
           conf.headers.authorization = `Bearer ${req.cookies.get('token')}`;
         }
