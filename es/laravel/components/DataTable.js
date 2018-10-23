@@ -11,7 +11,7 @@ import _compact from 'lodash/compact';
 import _find from 'lodash/find';
 import React, { Component } from 'react';
 import { Alert, ButtonToolbar, DropdownButton, MenuItem, Image } from 'react-bootstrap';
-import withRouter from 'react-router';
+import { withRouter } from 'react-router';
 import Paginator from './Paginator';
 import moment from '../utils/moment';
 import numeral from '../utils/numeral';
