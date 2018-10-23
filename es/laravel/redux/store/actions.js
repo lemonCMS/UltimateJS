@@ -219,7 +219,7 @@ export function loadStackItem(key, path, id, params) {
 export function request(type, path, params) {
   return function (dispatch, state, client) {
     return client[type](path, params).catch(function (Exception) {
-      return alert(Exception.message);
+      return console.error(Exception.message);
     });
   };
 }
