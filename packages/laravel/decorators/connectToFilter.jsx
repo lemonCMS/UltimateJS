@@ -20,7 +20,7 @@ let myTimeout = null;
 export function createAllParamsForFetch(props) {
   const pathname = _get(props, 'history.location.pathname', null);
   const params = _assign(
-    _get(state, ['routesState', 'routes', pathname, 'form'], {}),
+    _get(props, ['routesState', 'routes', pathname, 'form'], {}),
     Qs.parse(_get(props, 'history.location.search', ''), {ignoreQueryPrefix: true})
   );
 
