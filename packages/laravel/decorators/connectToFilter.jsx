@@ -38,7 +38,7 @@ export default function connectToFilter(rest) {
   }
 
   return (WrappedComponent) => {
-    @withRouter()
+    @withRouter
     @connect(state => ({
       routesState: state.routesState
     }))

@@ -40,13 +40,13 @@ export default function connectToFilter(rest) {
   }
 
   return function (WrappedComponent) {
-    var _dec, _dec2, _class;
+    var _dec, _class;
 
-    var StateConnection = (_dec = withRouter(), _dec2 = connect(function (state) {
+    var StateConnection = (_dec = connect(function (state) {
       return {
         routesState: state.routesState
       };
-    }), _dec(_class = _dec2(_class =
+    }), withRouter(_class = _dec(_class =
     /*#__PURE__*/
     function (_Component) {
       _inheritsLoose(StateConnection, _Component);
