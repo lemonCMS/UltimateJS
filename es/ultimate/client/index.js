@@ -1,6 +1,5 @@
 import _regeneratorRuntime from "@babel/runtime/regenerator";
 import _asyncToGenerator from "@babel/runtime/helpers/esm/asyncToGenerator";
-import '@babel/polyfill';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
