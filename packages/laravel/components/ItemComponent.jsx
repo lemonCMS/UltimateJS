@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import _get from 'lodash/get';
 import _has from 'lodash/has';
+import {withRouter} from 'react-router';
 import {post, update} from '../redux/store/actions';
 
+@withRouter
 class TestComponent extends React.Component {
 
   constructor(props, context) {
@@ -13,28 +15,28 @@ class TestComponent extends React.Component {
   }
 
   componentWillMount() {
-    const edit = _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
-    const id = edit ? this.context.router.route.match.params.id : null;
+    const edit = _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
+    const id = edit ? this.props.route.match.params.id : null;
 
     this.setState({
       id: id,
       edit: edit,
-      confirm: _has(this.context.router.history.location.pathname.match(/confirm$/g), [0]),
-      close: _has(this.context.router.history.location.pathname.match(/close/g), [0]),
-      newItem: _has(this.context.router.history.location.pathname.match(/new/g), [0])
+      confirm: _has(this.props.history.location.pathname.match(/confirm$/g), [0]),
+      close: _has(this.props.history.location.pathname.match(/close/g), [0]),
+      newItem: _has(this.props.history.location.pathname.match(/new/g), [0])
     });
   }
 
   componentWillReceiveProps() {
-    const edit = _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
-    const id = edit ? this.context.router.route.match.params.id : null;
+    const edit = _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
+    const id = edit ? this.props.route.match.params.id : null;
 
     this.setState({
       id: id,
-      edit: _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]),
-      confirm: _has(this.context.router.history.location.pathname.match(/confirm$/g), [0]),
-      close: _has(this.context.router.history.location.pathname.match(/close/g), [0]),
-      newItem: _has(this.context.router.history.location.pathname.match(/new/g), [0])
+      edit: _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]),
+      confirm: _has(this.props.history.location.pathname.match(/confirm$/g), [0]),
+      close: _has(this.props.history.location.pathname.match(/close/g), [0]),
+      newItem: _has(this.props.history.location.pathname.match(/new/g), [0])
     });
   }
 
@@ -52,7 +54,7 @@ class TestComponent extends React.Component {
           resolve(ret.error);
         }
         if (this.state.newItem) {
-          this.context.router.history.push(`${this.path}/${_get(ret, 'id', 'new')}/edit`);
+          this.props.history.push(`${this.path}/${_get(ret, 'id', 'new')}/edit`);
         }
         resolve();
 
@@ -66,7 +68,7 @@ class TestComponent extends React.Component {
   };
 
   edit() {
-    this.context.router.push(`${this.path}/${this.props.params.id}/edit`);
+    this.props.history.push(`${this.path}/${this.props.params.id}/edit`);
   }
 
   render() {
@@ -76,7 +78,8 @@ class TestComponent extends React.Component {
 }
 
 TestComponent.propTypes = {
-  'params': PropTypes.object
+  params: PropTypes.object,
+  history: PropTypes.object
 };
 TestComponent.defaultProps = {};
 

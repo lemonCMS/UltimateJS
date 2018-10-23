@@ -2,12 +2,16 @@ import _regeneratorRuntime from "@babel/runtime/regenerator";
 import _asyncToGenerator from "@babel/runtime/helpers/esm/asyncToGenerator";
 import _inheritsLoose from "@babel/runtime/helpers/esm/inheritsLoose";
 import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
+
+var _class;
+
 import React from 'react';
 import _get from 'lodash/get';
 import _has from 'lodash/has';
+import { withRouter } from 'react-router';
 import { post, update } from '../redux/store/actions';
 
-var TestComponent =
+var TestComponent = withRouter(_class =
 /*#__PURE__*/
 function (_React$Component) {
   _inheritsLoose(TestComponent, _React$Component);
@@ -42,7 +46,7 @@ function (_React$Component) {
                     }
 
                     if (_this.state.newItem) {
-                      _this.context.router.history.push(_this.path + "/" + _get(ret, 'id', 'new') + "/edit");
+                      _this.props.history.push(_this.path + "/" + _get(ret, 'id', 'new') + "/edit");
                     }
 
                     resolve();
@@ -76,33 +80,33 @@ function (_React$Component) {
   var _proto = TestComponent.prototype;
 
   _proto.componentWillMount = function componentWillMount() {
-    var edit = _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
+    var edit = _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
 
-    var id = edit ? this.context.router.route.match.params.id : null;
+    var id = edit ? this.props.route.match.params.id : null;
     this.setState({
       id: id,
       edit: edit,
-      confirm: _has(this.context.router.history.location.pathname.match(/confirm$/g), [0]),
-      close: _has(this.context.router.history.location.pathname.match(/close/g), [0]),
-      newItem: _has(this.context.router.history.location.pathname.match(/new/g), [0])
+      confirm: _has(this.props.history.location.pathname.match(/confirm$/g), [0]),
+      close: _has(this.props.history.location.pathname.match(/close/g), [0]),
+      newItem: _has(this.props.history.location.pathname.match(/new/g), [0])
     });
   };
 
   _proto.componentWillReceiveProps = function componentWillReceiveProps() {
-    var edit = _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
+    var edit = _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]);
 
-    var id = edit ? this.context.router.route.match.params.id : null;
+    var id = edit ? this.props.route.match.params.id : null;
     this.setState({
       id: id,
-      edit: _has(this.context.router.history.location.pathname.match(/(edit|confirm|close)$/g), [0]),
-      confirm: _has(this.context.router.history.location.pathname.match(/confirm$/g), [0]),
-      close: _has(this.context.router.history.location.pathname.match(/close/g), [0]),
-      newItem: _has(this.context.router.history.location.pathname.match(/new/g), [0])
+      edit: _has(this.props.history.location.pathname.match(/(edit|confirm|close)$/g), [0]),
+      confirm: _has(this.props.history.location.pathname.match(/confirm$/g), [0]),
+      close: _has(this.props.history.location.pathname.match(/close/g), [0]),
+      newItem: _has(this.props.history.location.pathname.match(/new/g), [0])
     });
   };
 
   _proto.edit = function edit() {
-    this.context.router.push(this.path + "/" + this.props.params.id + "/edit");
+    this.props.history.push(this.path + "/" + this.props.params.id + "/edit");
   };
 
   _proto.render = function render() {
@@ -110,7 +114,7 @@ function (_React$Component) {
   };
 
   return TestComponent;
-}(React.Component);
+}(React.Component)) || _class;
 
 TestComponent.defaultProps = {};
 export default TestComponent;

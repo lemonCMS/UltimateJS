@@ -9,6 +9,7 @@ import _compact from 'lodash/compact';
 import _find from 'lodash/find';
 import React, {Component} from 'react';
 import {Alert, ButtonToolbar, DropdownButton, MenuItem, Image} from 'react-bootstrap';
+import withRouter from 'react-router';
 import Paginator from './Paginator';
 import moment from '../utils/moment';
 import numeral from '../utils/numeral';
@@ -26,7 +27,8 @@ export default class DataTable extends Component {
     edit: PropTypes.func,
     pushOnState: PropTypes.func,
     dispatch: PropTypes.func,
-    inputOnStack: PropTypes.func
+    inputOnStack: PropTypes.func,
+    history: PropTypes.object
   };
 
   static contextTypes = {
@@ -431,7 +433,7 @@ export default class DataTable extends Component {
     } else if (_has(col, 'link') && _has(col, 'onClick')) {
       const click = (event) => {
         event.preventDefault();
-        col.onClick(record, this.context.router);
+        col.onClick(record, this.props.history);
       };
       cell.push((
         <button
@@ -458,7 +460,7 @@ export default class DataTable extends Component {
           key={key2}
           className="btn btn-link"
           onClick={() => {
-            col.onClick(item, this.context.router);
+            col.onClick(item, this.props.history);
           }}>
           {show}
         </button>);
@@ -473,7 +475,7 @@ export default class DataTable extends Component {
       if (!_isEmpty(record, col.show, '')) {
         const click = (event) => {
           event.preventDefault();
-          col.onClick(record, this.context.router);
+          col.onClick(record, this.props.history);
         };
 
         cell.push(<button
@@ -521,7 +523,7 @@ export default class DataTable extends Component {
             const click = () => {
               if (_has(item, 'onClick')) {
                 const {paginator: {currPage}} = this.props;
-                item.onClick({record, currPage, router: this.context.router, dispatch: this.props.dispatch});
+                item.onClick({record, currPage, router: this.props.history, dispatch: this.props.dispatch});
               }
             };
             return (
@@ -551,7 +553,7 @@ export default class DataTable extends Component {
     return _map(buttons, (button, key) => {
       const click = () => {
         if (_has(button, 'onClick')) {
-          button.onClick(record, this.context.router);
+          button.onClick(record, this.props.history);
         }
       };
 

@@ -11,6 +11,7 @@ import _compact from 'lodash/compact';
 import _find from 'lodash/find';
 import React, { Component } from 'react';
 import { Alert, ButtonToolbar, DropdownButton, MenuItem, Image } from 'react-bootstrap';
+import withRouter from 'react-router';
 import Paginator from './Paginator';
 import moment from '../utils/moment';
 import numeral from '../utils/numeral';
@@ -436,7 +437,7 @@ function (_Component) {
     } else if (_has(col, 'link') && _has(col, 'onClick')) {
       var _click = function _click(event) {
         event.preventDefault();
-        col.onClick(record, _this7.context.router);
+        col.onClick(record, _this7.props.history);
       };
 
       cell.push(React.createElement("button", {
@@ -465,7 +466,7 @@ function (_Component) {
           key: key2,
           className: "btn btn-link",
           onClick: function onClick() {
-            col.onClick(item, _this7.context.router);
+            col.onClick(item, _this7.props.history);
           }
         }, show));
       });
@@ -479,7 +480,7 @@ function (_Component) {
       if (!_isEmpty(record, col.show, '')) {
         var _click2 = function _click2(event) {
           event.preventDefault();
-          col.onClick(record, _this7.context.router);
+          col.onClick(record, _this7.props.history);
         };
 
         cell.push(React.createElement("button", {
@@ -554,7 +555,7 @@ function (_Component) {
             item.onClick({
               record: record,
               currPage: currPage,
-              router: _this7.context.router,
+              router: _this7.props.history,
               dispatch: _this7.props.dispatch
             });
           }
@@ -590,7 +591,7 @@ function (_Component) {
     return _map(buttons, function (button, key) {
       var click = function click() {
         if (_has(button, 'onClick')) {
-          button.onClick(record, _this8.context.router);
+          button.onClick(record, _this8.props.history);
         }
       };
 
