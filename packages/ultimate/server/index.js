@@ -45,7 +45,7 @@ export const render = (
       const history = createMemoryHistory({
         initialEntries: [req.originalUrl],
       });
-      providers.client = apiClient();
+      providers.client = apiClient(req);
       providers.history = history;
       const store = initializeStore({}, providers);
 

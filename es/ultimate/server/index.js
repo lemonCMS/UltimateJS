@@ -54,7 +54,7 @@ export var render = function render(_ref, stats, routes, _ref2, wrapper, awaitRe
             history = createMemoryHistory({
               initialEntries: [req.originalUrl]
             });
-            providers.client = apiClient();
+            providers.client = apiClient(req);
             providers.history = history;
             store = initializeStore({}, providers);
             bundles = [];
