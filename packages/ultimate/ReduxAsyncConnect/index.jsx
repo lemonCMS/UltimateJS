@@ -25,6 +25,13 @@ class ReduxAsyncConnect extends Component {
     authorized: true
   };
 
+
+/*  static getDerivedStateFromProps(props) {
+    return {
+      previousLocation: props.location
+    }
+  }*/
+
   componentDidMount() {
     NProgress.configure({trickleSpeed: 200});
     const {
@@ -98,6 +105,8 @@ class ReduxAsyncConnect extends Component {
     if (this.state.authorized === false) {
       return <Redirect to="/" />;
     }
+
+    console.log('Async', previousLocation || location);
 
     // use a controlled <Route> to trick all descendants into
     // rendering the old location

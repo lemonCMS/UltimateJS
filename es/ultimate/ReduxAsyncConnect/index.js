@@ -29,6 +29,11 @@ function (_Component) {
 
   var _proto = ReduxAsyncConnect.prototype;
 
+  /*  static getDerivedStateFromProps(props) {
+      return {
+        previousLocation: props.location
+      }
+    }*/
   _proto.componentDidMount = function componentDidMount() {
     NProgress.configure({
       trickleSpeed: 200
@@ -195,9 +200,10 @@ function (_Component) {
       return React.createElement(Redirect, {
         to: "/"
       });
-    } // use a controlled <Route> to trick all descendants into
-    // rendering the old location
+    }
 
+    console.log('Async', previousLocation || location); // use a controlled <Route> to trick all descendants into
+    // rendering the old location
 
     return React.createElement(Route, {
       location: previousLocation || location,
