@@ -32,10 +32,6 @@ class DataTable extends Component {
     history: PropTypes.object
   };
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  };
-
   constructor() {
     super();
     this.renderRows = this.renderRows.bind(this);
