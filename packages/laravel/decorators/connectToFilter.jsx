@@ -18,10 +18,10 @@ import {storeState} from '../redux/routeState/actions';
 let myTimeout = null;
 
 export function createAllParamsForFetch(props, match, history) {
-  const pathname = _get(props, 'history.location.pathname', null);
+  const pathname = _get(history, 'location.pathname', null);
   const params = _assign(
     _get(props, ['routesState', 'routes', pathname, 'form'], {}),
-    Qs.parse(_get(props, 'history.location.search', ''), {ignoreQueryPrefix: true})
+    Qs.parse(_get(history, 'location.search', ''), {ignoreQueryPrefix: true})
   );
 
   return _omit(params, value => !value);
