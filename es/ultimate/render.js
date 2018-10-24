@@ -25,13 +25,13 @@ function _render() {
   _render = _asyncToGenerator(
   /*#__PURE__*/
   _regeneratorRuntime.mark(function _callee3(options) {
-    var req, res, routes, assets, document, customRenderer, store, client, rest, Doc, context, renderPage, _ref2, components, match, params, locals;
+    var req, res, routes, assets, document, customRenderer, store, client, history, rest, Doc, context, renderPage, _ref2, components, match, params, locals;
 
     return _regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            req = options.req, res = options.res, routes = options.routes, assets = options.assets, document = options.document, customRenderer = options.customRenderer, store = options.store, client = options.client, rest = _objectWithoutPropertiesLoose(options, ["req", "res", "routes", "assets", "document", "customRenderer", "store", "client"]);
+            req = options.req, res = options.res, routes = options.routes, assets = options.assets, document = options.document, customRenderer = options.customRenderer, store = options.store, client = options.client, history = options.history, rest = _objectWithoutPropertiesLoose(options, ["req", "res", "routes", "assets", "document", "customRenderer", "store", "client", "history"]);
             Doc = document || DefaultDoc;
             context = {};
 
@@ -94,7 +94,8 @@ function _render() {
               store: store,
               match: match,
               params: params,
-              client: client
+              client: client,
+              history: history
             };
             _context3.next = 13;
             return authorizeWait('authorized', components, locals).then(

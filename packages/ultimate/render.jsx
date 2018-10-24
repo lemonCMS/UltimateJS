@@ -14,7 +14,7 @@ const modPageFn = function(Page) {
 export async function render(options) {
 
 
-  const { req, res, routes, assets, document, customRenderer, store, client, ...rest } = options;
+  const { req, res, routes, assets, document, customRenderer, store, client, history, ...rest } = options;
 
   const Doc = document || DefaultDoc;
   const context = {};
@@ -39,7 +39,8 @@ export async function render(options) {
     store,
     match,
     params,
-    client
+    client,
+    history
   };
 
   return await authorizeWait('authorized', components, locals).then(async () => {

@@ -102,6 +102,7 @@ export var render = function render(_ref, stats, routes, _ref2, wrapper, awaitRe
               routes: routes,
               assets: Object.assign({}, vendorAssets, assets),
               store: store,
+              history: history,
               client: providers.client
             });
 

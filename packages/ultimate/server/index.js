@@ -80,6 +80,7 @@ export const render = (
         routes,
         assets: Object.assign({}, vendorAssets, assets),
         store,
+        history,
         client: providers.client,
       });
       res.send(html);
