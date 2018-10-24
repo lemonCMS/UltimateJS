@@ -14,7 +14,8 @@ import Paginator from './Paginator';
 import moment from '../utils/moment';
 import numeral from '../utils/numeral';
 
-export default class DataTable extends Component {
+@withRouter
+class DataTable extends Component {
   static propTypes = {
     records: PropTypes.array.isRequired,
     cols: PropTypes.array,
@@ -606,3 +607,5 @@ export default class DataTable extends Component {
     );
   }
 }
+
+export default DataTable;

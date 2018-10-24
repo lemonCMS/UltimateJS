@@ -1,5 +1,8 @@
 import _inheritsLoose from "@babel/runtime/helpers/esm/inheritsLoose";
 import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
+
+var _class, _class2, _temp;
+
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 import _has from 'lodash/has';
@@ -16,7 +19,7 @@ import Paginator from './Paginator';
 import moment from '../utils/moment';
 import numeral from '../utils/numeral';
 
-var DataTable =
+var DataTable = withRouter(_class = (_temp = _class2 =
 /*#__PURE__*/
 function (_Component) {
   _inheritsLoose(DataTable, _Component);
@@ -644,9 +647,8 @@ function (_Component) {
   };
 
   return DataTable;
-}(Component);
-
-DataTable.contextTypes = {
+}(Component), _class2.contextTypes = {
   router: PropTypes.object.isRequired
-};
-export { DataTable as default };
+}, _temp)) || _class;
+
+export default DataTable;
