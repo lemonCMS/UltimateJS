@@ -11,7 +11,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/FormControl';
-import HelpBlock from 'react-bootstrap/lib/FormText';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import {Field} from 'react-final-form';
