@@ -28,9 +28,10 @@ export default function connnectToList(properties) {
             dispatch = _ref$store.dispatch,
             getState = _ref$store.getState,
             params = _ref.params,
-            match = _ref.match;
+            match = _ref.match,
+            history = _ref.history;
         var promises = [];
-        var state = createAllParamsForFetch(getState(), match);
+        var state = createAllParamsForFetch(getState(), match, history);
 
         var api = function api() {
           if (_isFunction(properties.api)) {
